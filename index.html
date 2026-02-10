@@ -18,28 +18,47 @@
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 60px 20px;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Subtle noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 204, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 204, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 680px;
             width: 100%;
             margin: 0 auto;
-            text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         /* Logo */
         .logo {
-            margin-bottom: 20px;
-            animation: fadeIn 0.8s ease-out;
+            margin-bottom: 16px;
+            animation: fadeIn 1s ease-out;
         }
 
         .logo-text {
-            font-size: 56px;
+            font-size: 72px;
             font-weight: 900;
-            line-height: 0.9;
-            letter-spacing: 8px;
+            line-height: 0.85;
+            letter-spacing: 12px;
+            text-align: center;
         }
 
         .logo-top {
@@ -47,125 +66,206 @@
         }
 
         .logo-divider {
-            width: 180px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ffcc, transparent);
-            margin: 14px auto;
+            width: 240px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffcc 20%, #00ffcc 80%, transparent);
+            margin: 20px auto;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
         }
 
         .logo-bottom {
             display: block;
-            margin-left: 20px;
+            margin-left: 30px;
         }
 
         /* Bio */
         .bio {
-            font-size: 15px;
-            color: #888;
-            margin-bottom: 50px;
-            letter-spacing: 1px;
-            animation: fadeIn 1s ease-out 0.2s both;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 80px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+            animation: fadeIn 1.2s ease-out 0.3s both;
         }
 
         /* Featured Track Section */
         .featured-track {
-            background: #151515;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 50px;
-            animation: fadeInUp 0.6s ease-out 0.4s both;
+            background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            padding: 48px 40px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .featured-track::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.3), transparent);
         }
 
         .featured-label {
-            font-size: 11px;
-            letter-spacing: 2px;
+            font-size: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             color: #00ffcc;
-            margin-bottom: 20px;
-            font-weight: 600;
+            margin-bottom: 32px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .track-cover-wrapper {
+            max-width: 320px;
+            margin: 0 auto 36px;
+            position: relative;
+        }
+
+        .track-cover-wrapper::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), transparent);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .track-cover-wrapper:hover::after {
+            opacity: 1;
         }
 
         .track-cover {
             width: 100%;
-            max-width: 300px;
             height: auto;
             border-radius: 8px;
-            margin: 0 auto 24px;
             display: block;
-            box-shadow: 0 8px 32px rgba(0, 255, 204, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .track-cover:hover {
+            transform: scale(1.02);
         }
 
         .track-title {
-            font-size: 32px;
+            font-size: 42px;
             font-weight: 900;
-            letter-spacing: 2px;
+            letter-spacing: 6px;
             margin-bottom: 8px;
+            text-align: center;
         }
 
         .track-artist {
-            font-size: 16px;
-            color: #888;
-            margin-bottom: 24px;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 36px;
+            text-align: center;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .stream-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
         .stream-btn {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 12px 24px;
-            border-radius: 6px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 16px 20px;
+            border-radius: 8px;
             text-decoration: none;
             color: #ffffff;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             transition: all 0.3s ease;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stream-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stream-btn:hover::before {
+            left: 100%;
         }
 
         .stream-btn:hover {
             border-color: #00ffcc;
-            background: #222;
+            background: #0f0f0f;
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 204, 0.15);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #222, transparent);
+            margin: 60px 0;
         }
 
         /* Section Headers */
         .section-header {
-            font-size: 12px;
-            letter-spacing: 2px;
+            font-size: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: #666;
-            margin-bottom: 20px;
-            font-weight: 600;
+            color: #444;
+            margin-bottom: 24px;
+            font-weight: 700;
+            text-align: center;
         }
 
         /* Social Links */
         .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 50px;
-            animation: fadeInUp 0.6s ease-out 0.6s both;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.7s both;
         }
 
         .link {
             background: #151515;
-            border: 1px solid #222;
-            padding: 16px 28px;
+            border: 1px solid #1a1a1a;
+            padding: 20px 24px;
             border-radius: 8px;
             text-decoration: none;
             color: #ffffff;
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             transition: all 0.3s ease;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
@@ -177,8 +277,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.08), transparent);
+            transition: left 0.6s ease;
         }
 
         .link:hover::before {
@@ -189,47 +289,70 @@
             border-color: #00ffcc;
             background: #1a1a1a;
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 204, 0.1);
         }
 
         /* Email Signup */
         .email-signup {
-            background: #151515;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.6s ease-out 0.8s both;
+            background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            padding: 48px 40px 40px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.9s both;
+        }
+
+        .email-signup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.3), transparent);
         }
 
         .signup-title {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 900;
             margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: 2px;
         }
 
         .signup-description {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 24px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 32px;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
         .form-container {
             width: 100%;
             overflow: hidden;
             border-radius: 8px;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
         }
 
         .google-form-iframe {
             border: none;
             background: transparent;
+            width: 100%;
+            min-height: 180px;
         }
 
         /* Footer */
         .footer {
-            font-size: 12px;
-            color: #444;
-            letter-spacing: 1px;
-            animation: fadeIn 1.2s ease-out 1s both;
+            font-size: 11px;
+            color: #333;
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
+            animation: fadeIn 1.4s ease-out 1.1s both;
         }
 
         /* Animations */
@@ -245,7 +368,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -255,41 +378,49 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            body {
+                padding: 40px 20px;
+            }
+
             .logo-text {
-                font-size: 48px;
-                letter-spacing: 6px;
+                font-size: 56px;
+                letter-spacing: 8px;
             }
 
             .logo-divider {
-                width: 150px;
+                width: 180px;
+                margin: 16px auto;
             }
 
             .logo-bottom {
-                margin-left: 18px;
+                margin-left: 20px;
             }
 
             .bio {
-                font-size: 14px;
+                font-size: 12px;
+                letter-spacing: 2px;
+                margin-bottom: 60px;
             }
 
             .featured-track {
-                padding: 24px;
+                padding: 36px 28px;
             }
 
             .track-title {
-                font-size: 28px;
+                font-size: 36px;
+                letter-spacing: 4px;
             }
 
             .stream-buttons {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
 
-            .stream-btn {
-                width: 100%;
+            .social-links {
+                grid-template-columns: 1fr;
             }
 
             .email-signup {
-                padding: 24px;
+                padding: 36px 28px 32px;
             }
         }
 
@@ -299,31 +430,39 @@
             }
 
             .logo-text {
-                font-size: 40px;
-                letter-spacing: 4px;
+                font-size: 48px;
+                letter-spacing: 6px;
             }
 
             .logo-divider {
-                width: 120px;
-                margin: 12px auto;
+                width: 150px;
+                margin: 14px auto;
+                height: 2px;
             }
 
             .logo-bottom {
-                margin-left: 12px;
+                margin-left: 16px;
             }
 
             .track-title {
-                font-size: 24px;
+                font-size: 32px;
+                letter-spacing: 3px;
+            }
+
+            .featured-track {
+                padding: 32px 24px;
+            }
+
+            .email-signup {
+                padding: 32px 24px 28px;
             }
         }
 
         /* Accessibility */
         .link:focus,
-        .stream-btn:focus,
-        .submit-btn:focus,
-        .email-input:focus {
+        .stream-btn:focus {
             outline: 2px solid #00ffcc;
-            outline-offset: 2px;
+            outline-offset: 3px;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -352,18 +491,22 @@
         <!-- Featured Track -->
         <div class="featured-track">
             <div class="featured-label">New Release</div>
-            <img src="listen-cover.png" alt="Listen - Jonah Boy" class="track-cover">
+            <div class="track-cover-wrapper">
+                <img src="listen-cover.png" alt="Listen - Jonah Boy" class="track-cover">
+            </div>
             <h2 class="track-title">LISTEN</h2>
             <p class="track-artist">Jonah Boy</p>
             <div class="stream-buttons">
                 <a href="https://open.spotify.com/artist/3fsE2p4n18ChinOx3Pah1A" class="stream-btn" target="_blank" rel="noopener noreferrer">
-                    Stream on Spotify
+                    Spotify
                 </a>
                 <a href="https://soundcloud.com/jonah_boy" class="stream-btn" target="_blank" rel="noopener noreferrer">
-                    Stream on SoundCloud
+                    SoundCloud
                 </a>
             </div>
         </div>
+
+        <div class="divider"></div>
 
         <!-- Social Links -->
         <div class="section-header">Follow</div>
@@ -376,6 +519,8 @@
             </a>
         </div>
 
+        <div class="divider"></div>
+
         <!-- Email Signup -->
         <div class="email-signup">
             <h3 class="signup-title">Join the List</h3>
@@ -384,7 +529,7 @@
                 <iframe 
                     src="https://docs.google.com/forms/d/e/1FAIpQLSehD9aEALsHTi6PTbcCYras1Q5sXOuckkLH409TVN1nTXkUGA/viewform?embedded=true" 
                     width="100%" 
-                    height="200" 
+                    height="180" 
                     frameborder="0" 
                     marginheight="0" 
                     marginwidth="0"
@@ -395,9 +540,7 @@
         </div>
 
         <!-- Footer -->
-        <p class="footer">© 2026 JONAH BOY</p>
+        <p class="footer">© 2026 Jonah Boy</p>
     </div>
-
-
 </body>
 </html>
