@@ -177,9 +177,9 @@
         }
 
         .stream-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .stream-btn {
@@ -202,6 +202,13 @@
             overflow: hidden;
         }
 
+        .stream-btn-primary {
+            background: #00ffcc;
+            color: #0a0a0a;
+            border-color: #00ffcc;
+            font-weight: 900;
+        }
+
         .stream-btn::before {
             content: '';
             position: absolute;
@@ -213,6 +220,10 @@
             transition: left 0.6s ease;
         }
 
+        .stream-btn-primary::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
         .stream-btn:hover::before {
             left: 100%;
         }
@@ -222,6 +233,12 @@
             background: #0f0f0f;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 255, 204, 0.15);
+        }
+
+        .stream-btn-primary:hover {
+            background: #00e6b8;
+            border-color: #00e6b8;
+            box-shadow: 0 8px 24px rgba(0, 255, 204, 0.4);
         }
 
         /* Divider */
@@ -292,59 +309,6 @@
             box-shadow: 0 8px 24px rgba(0, 255, 204, 0.1);
         }
 
-        /* Email Signup */
-        .email-signup {
-            background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
-            border: 1px solid #1a1a1a;
-            border-radius: 16px;
-            padding: 48px 40px 40px;
-            margin-bottom: 60px;
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.8s ease-out 0.9s both;
-        }
-
-        .email-signup::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.3), transparent);
-        }
-
-        .signup-title {
-            font-size: 24px;
-            font-weight: 900;
-            margin-bottom: 8px;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-
-        .signup-description {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 32px;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-
-        .form-container {
-            width: 100%;
-            overflow: hidden;
-            border-radius: 8px;
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-        }
-
-        .google-form-iframe {
-            border: none;
-            background: transparent;
-            width: 100%;
-            min-height: 180px;
-        }
-
         /* Footer */
         .footer {
             font-size: 11px;
@@ -411,16 +375,8 @@
                 letter-spacing: 4px;
             }
 
-            .stream-buttons {
-                grid-template-columns: 1fr;
-            }
-
             .social-links {
                 grid-template-columns: 1fr;
-            }
-
-            .email-signup {
-                padding: 36px 28px 32px;
             }
         }
 
@@ -452,11 +408,6 @@
             .featured-track {
                 padding: 32px 24px;
             }
-
-            .email-signup {
-                padding: 32px 24px 28px;
-            }
-        }
 
         /* Accessibility */
         .link:focus,
@@ -497,6 +448,9 @@
             <h2 class="track-title">LISTEN</h2>
             <p class="track-artist">Jonah Boy</p>
             <div class="stream-buttons">
+                <a href="https://www.beatport.com/track/listen/23979654" class="stream-btn stream-btn-primary" target="_blank" rel="noopener noreferrer">
+                    Buy on Beatport
+                </a>
                 <a href="https://open.spotify.com/artist/3fsE2p4n18ChinOx3Pah1A" class="stream-btn" target="_blank" rel="noopener noreferrer">
                     Spotify
                 </a>
@@ -517,26 +471,6 @@
             <a href="https://www.instagram.com/jonahboymusic" class="link" target="_blank" rel="noopener noreferrer">
                 Instagram
             </a>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Email Signup -->
-        <div class="email-signup">
-            <h3 class="signup-title">Join the List</h3>
-            <p class="signup-description">Get updates on new releases, shows, and exclusive content</p>
-            <div class="form-container">
-                <iframe 
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSehD9aEALsHTi6PTbcCYras1Q5sXOuckkLH409TVN1nTXkUGA/viewform?embedded=true" 
-                    width="100%" 
-                    height="180" 
-                    frameborder="0" 
-                    marginheight="0" 
-                    marginwidth="0"
-                    class="google-form-iframe">
-                    Loading…
-                </iframe>
-            </div>
         </div>
 
         <!-- Footer -->
