@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JONAH BOY | Drum & Bass Producer</title>
+    <meta name="description" content="JONAH BOY - Drum & Bass Producer based in Brighton. Listen to my latest track 'Listen' and follow my journey.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Logo */
+        .logo {
+            margin-bottom: 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo-text {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: 8px;
+        }
+
+        .logo-top {
+            display: block;
+        }
+
+        .logo-divider {
+            width: 180px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+            margin: 14px auto;
+        }
+
+        .logo-bottom {
+            display: block;
+            margin-left: 20px;
+        }
+
+        /* Bio */
+        .bio {
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+            animation: fadeIn 1s ease-out 0.2s both;
+        }
+
+        /* Featured Track Section */
+        .featured-track {
+            background: #151515;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+
+        .featured-label {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #00ffcc;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .track-cover {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            margin: 0 auto 24px;
+            display: block;
+            box-shadow: 0 8px 32px rgba(0, 255, 204, 0.1);
+        }
+
+        .track-title {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .track-artist {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        .stream-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stream-btn {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .stream-btn:hover {
+            border-color: #00ffcc;
+            background: #222;
+            transform: translateY(-2px);
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+        }
+
+        .link {
+            background: #151515;
+            border: 1px solid #222;
+            padding: 16px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link:hover::before {
+            left: 100%;
+        }
+
+        .link:hover {
+            border-color: #00ffcc;
+            background: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        /* Email Signup */
+        .email-signup {
+            background: #151515;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out 0.8s both;
+        }
+
+        .signup-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .signup-description {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        .form-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .google-form-iframe {
+            border: none;
+            background: transparent;
+        }
+
+        /* Footer */
+        .footer {
+            font-size: 12px;
+            color: #444;
+            letter-spacing: 1px;
+            animation: fadeIn 1.2s ease-out 1s both;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 48px;
+                letter-spacing: 6px;
+            }
+
+            .logo-divider {
+                width: 150px;
+            }
+
+            .logo-bottom {
+                margin-left: 18px;
+            }
+
+            .bio {
+                font-size: 14px;
+            }
+
+            .featured-track {
+                padding: 24px;
+            }
+
+            .track-title {
+                font-size: 28px;
+            }
+
+            .stream-buttons {
+                flex-direction: column;
+            }
+
+            .stream-btn {
+                width: 100%;
+            }
+
+            .email-signup {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 30px 16px;
+            }
+
+            .logo-text {
+                font-size: 40px;
+                letter-spacing: 4px;
+            }
+
+            .logo-divider {
+                width: 120px;
+                margin: 12px auto;
+            }
+
+            .logo-bottom {
+                margin-left: 12px;
+            }
+
+            .track-title {
+                font-size: 24px;
+            }
+        }
+
+        /* Accessibility */
+        .link:focus,
+        .stream-btn:focus,
+        .submit-btn:focus,
+        .email-input:focus {
+            outline: 2px solid #00ffcc;
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <div class="logo-text">
+                <span class="logo-top">JONAH</span>
+                <div class="logo-divider"></div>
+                <span class="logo-bottom">BOY</span>
+            </div>
+        </div>
+
+        <!-- Bio -->
+        <p class="bio">Drum & Bass Producer | Brighton</p>
+
+        <!-- Featured Track -->
+        <div class="featured-track">
+            <div class="featured-label">New Release</div>
+            <img src="listen-cover.png" alt="Listen - Jonah Boy" class="track-cover">
+            <h2 class="track-title">LISTEN</h2>
+            <p class="track-artist">Jonah Boy</p>
+            <div class="stream-buttons">
+                <a href="https://open.spotify.com/artist/3fsE2p4n18ChinOx3Pah1A" class="stream-btn" target="_blank" rel="noopener noreferrer">
+                    Stream on Spotify
+                </a>
+                <a href="https://soundcloud.com/jonah_boy" class="stream-btn" target="_blank" rel="noopener noreferrer">
+                    Stream on SoundCloud
+                </a>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="section-header">Follow</div>
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@jonah.boy_" class="link" target="_blank" rel="noopener noreferrer">
+                TikTok
+            </a>
+            <a href="https://www.instagram.com/jonahboymusic" class="link" target="_blank" rel="noopener noreferrer">
+                Instagram
+            </a>
+        </div>
+
+        <!-- Email Signup -->
+        <div class="email-signup">
+            <h3 class="signup-title">Join the List</h3>
+            <p class="signup-description">Get updates on new releases, shows, and exclusive content</p>
+            <div class="form-container">
+                <iframe 
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSehD9aEALsHTi6PTbcCYras1Q5sXOuckkLH409TVN1nTXkUGA/viewform?embedded=true" 
+                    width="100%" 
+                    height="200" 
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0"
+                    class="google-form-iframe">
+                    Loading…
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <p class="footer">© 2026 JONAH BOY</p>
+    </div>
+
+
+</body>
+</html>
