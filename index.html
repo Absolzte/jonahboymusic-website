@@ -1,559 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JONAH BOY | Drum & Bass Producer</title>
-    <meta name="description" content="JONAH BOY - Drum & Bass DJ/Producer based in Brighton. Listen to my latest track 'Listen' and follow my journey.">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JONAH BOY — Drum & Bass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            background: #0a0a0a;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            min-height: 100vh;
-            padding: 40px 20px 60px;
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-        }
+    :root {
+      --black: #080808;
+      --off-black: #0f0f0f;
+      --panel: #111111;
+      --panel-hover: #161616;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --white: #f0ece4;
+      --muted: rgba(240,236,228,0.42);
+      --accent: #c8ff46;
+      --accent-dim: rgba(200,255,70,0.1);
+      --accent-border: rgba(200,255,70,0.35);
+    }
 
-        /* Noise texture overlay for underground feel */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"),
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 204, 0.04) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 255, 204, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Subtle vignette */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+      min-height: 100vh;
+    }
 
-        .container {
-            max-width: 680px;
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+    /* ── CURSOR ── */
+    .cursor {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      mix-blend-mode: difference;
+      transition: width 0.15s, height 0.15s;
+    }
+    .cursor-ring {
+      position: fixed; width: 32px; height: 32px;
+      border: 1px solid rgba(200,255,70,0.4);
+      border-radius: 50%; pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+    }
+    a:hover .cursor { width: 16px; height: 16px; }
 
-        /* Logo */
-        .logo {
-            margin-bottom: 12px;
-            animation: fadeIn 1s ease-out;
-        }
+    /* ── GRAIN ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 200; opacity: 0.5;
+    }
 
-        .logo-text {
-            font-size: 64px;
-            font-weight: 900;
-            line-height: 0.85;
-            letter-spacing: 12px;
-            text-align: center;
-        }
+    /* ── AMBIENT GLOW ── */
+    .glow {
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(200,255,70,0.035) 0%, transparent 68%);
+      top: 20%; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none; z-index: 0;
+      animation: glowDrift 8s ease-in-out infinite;
+    }
+    @keyframes glowDrift {
+      0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
+      50% { transform: translateX(-50%) translateY(30px); opacity: 1; }
+    }
 
-        .logo-top {
-            display: block;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.3rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,8,8,0.88);
+      backdrop-filter: blur(14px);
+      animation: fadeDown 0.9s ease 0.1s both;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 0.82rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-pill {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--black); background: var(--accent);
+      padding: 0.45rem 1.1rem; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-pill:hover { opacity: 0.85; }
 
-        .logo-divider {
-            width: 220px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #00ffcc 20%, #00ffcc 80%, transparent);
-            margin: 18px auto;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
-        }
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative; z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 9rem 2rem 6rem;
+      display: flex; flex-direction: column; gap: 0;
+    }
 
-        .logo-bottom {
-            display: block;
-            margin-left: 28px;
-        }
+    /* ── HERO HEADER ── */
+    .hero-header {
+      text-align: center;
+      padding-bottom: 3.5rem;
+      animation: fadeUp 0.9s ease 0.3s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      line-height: 0.92; letter-spacing: -0.02em;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 1.2rem;
+    }
 
-        /* Bio - mixed case for personality */
-        .bio {
-            text-align: center;
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 50px;
-            letter-spacing: 2px;
-            font-weight: 500;
-            animation: fadeIn 1.2s ease-out 0.2s both;
-        }
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px; background: var(--border);
+      margin: 0;
+    }
 
-        /* Featured Track Section */
-        .featured-track {
-            background: linear-gradient(135deg, #151515 0%, #0f0f0f 100%);
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 40px 36px 36px;
-            margin-bottom: 50px;
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 1.6rem 0 1.2rem;
+    }
 
-        .featured-track::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.4), transparent);
-        }
+    /* ── RELEASE BLOCK ── */
+    .release-block {
+      border: 1px solid var(--border);
+      overflow: hidden;
+      animation: fadeUp 0.9s ease 0.5s both;
+    }
+    .release-header {
+      padding: 2rem 2rem 0;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 1rem;
+    }
+    .release-badge-new {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      background: var(--accent-dim); color: var(--accent);
+      border: 1px solid var(--accent-border);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .release-track-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 0.95; letter-spacing: -0.02em;
+    }
+    .release-track-name em { font-style: italic; color: var(--accent); }
+    .release-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 0.6rem 2rem 1.8rem;
+    }
 
-        .featured-label {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #00ffcc;
-            margin-bottom: 28px;
-            font-weight: 700;
-            text-align: center;
-        }
+    /* Two CTA buttons */
+    .release-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+    }
+    .release-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 2rem;
+      text-decoration: none; color: var(--white);
+      background: var(--panel);
+      transition: background 0.25s;
+      gap: 1rem;
+    }
+    .release-btn:first-child {
+      border-right: 1px solid var(--border);
+    }
+    .release-btn:hover { background: var(--panel-hover); }
+    .release-btn:hover .btn-arrow { transform: translate(3px,-3px); color: var(--accent); }
+    .release-btn:first-child:hover { background: #1a1f0f; }
+    .btn-left { display: flex; flex-direction: column; gap: 0.3rem; }
+    .btn-platform {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .btn-action {
+      font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+    .btn-action-stream { color: var(--accent); }
+    .btn-arrow {
+      font-size: 1.1rem; color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
 
-        .track-cover-wrapper {
-            max-width: 300px;
-            margin: 0 auto 28px;
-            position: relative;
-        }
+    /* ── PREVIOUS RELEASES ── */
+    .prev-releases {
+      display: flex; flex-direction: column; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-top: none;
+      animation: fadeUp 0.9s ease 0.65s both;
+    }
+    .prev-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.3rem 2rem;
+      background: var(--panel);
+      text-decoration: none; color: var(--white);
+      transition: background 0.22s;
+      gap: 1rem;
+    }
+    .prev-row:hover { background: var(--panel-hover); }
+    .prev-row:hover .prev-arrow { transform: translate(3px,-3px); color: var(--accent); }
+    .prev-row-left { display: flex; align-items: center; gap: 1.4rem; }
+    .prev-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.1em;
+      color: var(--muted); width: 1.6rem; flex-shrink: 0;
+    }
+    .prev-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem; line-height: 1;
+    }
+    .prev-platform {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      flex-shrink: 0;
+    }
+    .prev-arrow {
+      font-size: 0.9rem; color: var(--muted);
+      transition: transform 0.2s, color 0.2s; flex-shrink: 0;
+    }
 
-        .track-cover-wrapper::after {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: -6px;
-            right: -6px;
-            bottom: -6px;
-            background: linear-gradient(135deg, rgba(0, 255, 204, 0.15), transparent);
-            border-radius: 10px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+    /* ── PLAYLIST BLOCK ── */
+    .playlist-block {
+      border: 1px solid var(--border);
+      display: flex; align-items: stretch;
+      text-decoration: none; color: var(--white);
+      transition: border-color 0.3s;
+      overflow: hidden;
+      animation: fadeUp 0.9s ease 0.75s both;
+    }
+    .playlist-block:hover { border-color: var(--accent-border); }
+    .playlist-block:hover .pl-arrow { transform: translate(4px,-4px); color: var(--accent); }
+    .playlist-block:hover .pl-rings .ring { animation-play-state: running; }
 
-        .track-cover-wrapper:hover::after {
-            opacity: 1;
-        }
+    .pl-info {
+      flex: 1; padding: 2rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      border-right: 1px solid var(--border);
+    }
+    .pl-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .pl-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      line-height: 1; letter-spacing: -0.02em;
+    }
+    .pl-name em { font-style: italic; color: var(--accent); }
+    .pl-desc {
+      font-size: 0.75rem; color: var(--muted);
+      line-height: 1.7; margin-top: 0.9rem;
+    }
+    .pl-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.8rem;
+    }
+    .pl-cta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--white);
+    }
+    .pl-arrow {
+      font-size: 1.1rem; color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+    .pl-visual {
+      width: 160px; flex-shrink: 0;
+      background: var(--off-black);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .pl-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(200,255,70,0.07) 0%, transparent 70%);
+    }
+    .pl-rings { position: relative; width: 120px; height: 120px; }
+    .pl-rings .ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(200,255,70,0.14);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+    .pl-rings .ring:nth-child(1) { width: 28px; height: 28px; border-color: rgba(200,255,70,0.6); animation-delay: 0s; }
+    .pl-rings .ring:nth-child(2) { width: 56px; height: 56px; animation-delay: 0.45s; }
+    .pl-rings .ring:nth-child(3) { width: 84px; height: 84px; animation-delay: 0.9s; }
+    .pl-rings .ring:nth-child(4) { width: 112px; height: 112px; animation-delay: 1.35s; }
+    .pl-rings .ring:nth-child(5) { width: 140px; height: 140px; animation-delay: 1.8s; }
+    @keyframes ringPulse {
+      0%,100% { opacity: 0.2; transform: translate(-50%,-50%) scale(1); }
+      50%      { opacity: 0.7; transform: translate(-50%,-50%) scale(1.04); }
+    }
 
-        .track-cover {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-            display: block;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-            transition: transform 0.4s ease;
-        }
+    /* ── SOCIALS ── */
+    .socials-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+      animation: fadeUp 0.9s ease 0.85s both;
+    }
+    .social-card {
+      background: var(--panel); padding: 1.6rem 1.4rem;
+      text-decoration: none; color: var(--white);
+      display: flex; flex-direction: column;
+      justify-content: space-between; gap: 1.2rem;
+      min-height: 110px;
+      transition: background 0.22s;
+      position: relative;
+    }
+    .social-card:hover { background: var(--panel-hover); }
+    .social-card:hover .soc-arrow { transform: translate(2px,-2px); color: var(--accent); }
+    .soc-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.56rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .soc-name {
+      font-weight: 700; font-size: 0.92rem;
+    }
+    .soc-arrow {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      font-size: 0.85rem; color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
 
-        .track-cover:hover {
-            transform: scale(1.02);
-        }
+    /* ── BOOKING ── */
+    .booking-block {
+      border: 1px solid var(--border);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.9s ease 0.95s both;
+    }
+    .booking-block::before {
+      content: 'BOOK';
+      position: absolute;
+      font-family: 'DM Serif Display', serif;
+      font-size: 16vw; color: rgba(255,255,255,0.018);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none; user-select: none; white-space: nowrap;
+    }
+    .booking-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .booking-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .booking-heading em { font-style: italic; color: var(--accent); }
+    .booking-sub {
+      font-size: 0.78rem; color: var(--muted);
+      line-height: 1.7; max-width: 360px;
+      margin: 0 auto 2rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--black); background: var(--accent);
+      padding: 0.8rem 2rem; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.87; transform: translateY(-2px); }
+    .booking-email {
+      display: block; margin-top: 1.2rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.12em; color: var(--muted);
+    }
 
-        .track-title {
-            font-size: 40px;
-            font-weight: 900;
-            letter-spacing: 6px;
-            margin-bottom: 4px;
-            text-align: center;
-        }
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .footer-logo {
+      font-weight: 800; font-size: 0.78rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-copy {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; color: var(--muted); letter-spacing: 0.08em;
+    }
 
-        .track-artist {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 6px;
-            text-align: center;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .track-status {
-            font-size: 11px;
-            color: #00ffcc;
-            text-align: center;
-            margin-bottom: 32px;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        .stream-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .stream-btn {
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            padding: 16px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Primary Beatport button with glow */
-        .stream-btn-primary {
-            background: #00ffcc;
-            color: #0a0a0a;
-            border-color: #00ffcc;
-            font-weight: 900;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-        }
-
-        .stream-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.15), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .stream-btn-primary::before {
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-        }
-
-        .stream-btn:hover::before {
-            left: 100%;
-        }
-
-        .stream-btn:hover {
-            border-color: #00ffcc;
-            background: #222;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0, 255, 204, 0.2);
-        }
-
-        .stream-btn-primary:hover {
-            background: #00e6b8;
-            border-color: #00e6b8;
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.5), 0 8px 24px rgba(0, 255, 204, 0.3);
-        }
-
-        /* Divider */
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #222, transparent);
-            margin: 50px 0 40px;
-        }
-
-        /* Section Headers */
-        .section-header {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #555;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        /* Social Links - improved styling */
-        .social-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        .link {
-            background: #151515;
-            border: 1px solid #2a2a2a;
-            padding: 18px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .link:hover::before {
-            left: 100%;
-        }
-
-        .link:hover {
-            border-color: #00ffcc;
-            background: #1a1a1a;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0, 255, 204, 0.15);
-        }
-
-        /* Contact section */
-        .contact {
-            text-align: center;
-            padding: 32px 24px;
-            background: linear-gradient(135deg, #0f0f0f 0%, #0a0a0a 100%);
-            border: 1px solid #1a1a1a;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.8s ease-out 0.8s both;
-        }
-
-        .contact-label {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #555;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .contact-email {
-            color: #00ffcc;
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .contact-email:hover {
-            color: #00e6b8;
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
-        }
-
-        /* Footer */
-        .footer {
-            font-size: 11px;
-            color: #333;
-            letter-spacing: 2px;
-            text-align: center;
-            text-transform: uppercase;
-            animation: fadeIn 1.4s ease-out 1s both;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 30px 20px 50px;
-            }
-
-            .logo-text {
-                font-size: 52px;
-                letter-spacing: 8px;
-            }
-
-            .logo-divider {
-                width: 170px;
-                margin: 14px auto;
-            }
-
-            .logo-bottom {
-                margin-left: 20px;
-            }
-
-            .bio {
-                font-size: 12px;
-                letter-spacing: 1.5px;
-                margin-bottom: 40px;
-            }
-
-            .featured-track {
-                padding: 32px 24px 28px;
-            }
-
-            .track-title {
-                font-size: 34px;
-                letter-spacing: 4px;
-            }
-
-            .social-links {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 24px 16px 40px;
-            }
-
-            .logo-text {
-                font-size: 44px;
-                letter-spacing: 6px;
-            }
-
-            .logo-divider {
-                width: 140px;
-                margin: 12px auto;
-                height: 2px;
-            }
-
-            .logo-bottom {
-                margin-left: 16px;
-            }
-
-            .bio {
-                margin-bottom: 32px;
-            }
-
-            .track-title {
-                font-size: 30px;
-                letter-spacing: 3px;
-            }
-
-            .featured-track {
-                padding: 28px 20px 24px;
-            }
-
-            .contact {
-                padding: 24px 20px;
-            }
-        }
-
-        /* Accessibility */
-        .link:focus,
-        .stream-btn:focus,
-        .contact-email:focus {
-            outline: 2px solid #00ffcc;
-            outline-offset: 3px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      nav { padding: 1.1rem 1.4rem; }
+      .page { padding: 7.5rem 1.2rem 4rem; }
+      .release-actions { grid-template-columns: 1fr; }
+      .release-btn:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .socials-grid { grid-template-columns: repeat(2,1fr); }
+      .pl-visual { display: none; }
+      .pl-info { border-right: none; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Logo -->
-        <div class="logo">
-            <div class="logo-text">
-                <span class="logo-top">JONAH</span>
-                <div class="logo-divider"></div>
-                <span class="logo-bottom">BOY</span>
-            </div>
-        </div>
 
-        <!-- Bio -->
-        <p class="bio">Drum & Bass Producer | Brighton</p>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="glow"></div>
 
-        <!-- Featured Track -->
-        <div class="featured-track">
-            <div class="featured-label">New Release</div>
-            <div class="track-cover-wrapper">
-                <img src="listen-cover.png" alt="Listen - Jonah Boy" class="track-cover">
-            </div>
-            <h2 class="track-title">LISTEN</h2>
-            <p class="track-artist">Jonah Boy</p>
-            <p class="track-status">Out Now</p>
-            <div class="stream-buttons">
-                <a href="https://www.beatport.com/track/listen/23979654" class="stream-btn stream-btn-primary" target="_blank" rel="noopener noreferrer">
-                    Buy on Beatport
-                </a>
-                <a href="https://open.spotify.com/artist/3fsE2p4n18ChinOx3Pah1A" class="stream-btn" target="_blank" rel="noopener noreferrer">
-                    Spotify
-                </a>
-                <a href="https://soundcloud.com/jonah_boy" class="stream-btn" target="_blank" rel="noopener noreferrer">
-                    SoundCloud
-                </a>
-            </div>
-        </div>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Jonah <span>Boy</span></a>
+    <a href="https://open.spotify.com/track/0VQh7Q2BRb6Nvfy2IR5b4v" target="_blank" class="nav-pill">New Track — Listen ↗</a>
+  </nav>
 
-        <div class="divider"></div>
+  <div class="page">
 
-        <!-- Social Links -->
-        <div class="section-header">Connect</div>
-        <div class="social-links">
-            <a href="https://www.tiktok.com/@jonah.boy_" class="link" target="_blank" rel="noopener noreferrer">
-                TikTok
-            </a>
-            <a href="https://www.instagram.com/jonahboymusic" class="link" target="_blank" rel="noopener noreferrer">
-                Instagram
-            </a>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Contact -->
-        <div class="contact">
-            <div class="contact-label">Bookings & Enquiries</div>
-            <a href="mailto:jonahboymusic@outlook.com" class="contact-email">jonahboymusic@outlook.com</a>
-        </div>
-
-        <!-- Footer -->
-        <p class="footer">© 2026 Jonah Boy</p>
+    <!-- HERO -->
+    <div class="hero-header">
+      <p class="hero-eyebrow">// Drum &amp; Bass — Producer &amp; DJ</p>
+      <h1 class="hero-name">Jonah <em>Boy</em></h1>
+      <p class="hero-sub">Jungle · Heavy Rollers · Liquid · Boomtown 2026</p>
     </div>
+
+    <!-- LATEST RELEASE -->
+    <p class="section-label">Latest Release</p>
+    <div class="release-block">
+      <div class="release-header">
+        <div class="release-track-name"><em>Listen</em></div>
+        <span class="release-badge-new">Out Now</span>
+      </div>
+      <div class="release-meta">Jonah Boy · Drum &amp; Bass · 2026</div>
+      <div class="release-actions">
+        <a href="https://open.spotify.com/track/0VQh7Q2BRb6Nvfy2IR5b4v" target="_blank" class="release-btn">
+          <div class="btn-left">
+            <span class="btn-platform">Spotify</span>
+            <span class="btn-action btn-action-stream">Stream Free</span>
+          </div>
+          <span class="btn-arrow">↗</span>
+        </a>
+        <a href="https://www.beatport.com/release/listen/5889649" target="_blank" class="release-btn">
+          <div class="btn-left">
+            <span class="btn-platform">Beatport</span>
+            <span class="btn-action">Buy / Download</span>
+          </div>
+          <span class="btn-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PREVIOUS RELEASES -->
+    <div class="prev-releases">
+      <a href="https://open.spotify.com/track/3XLGat8nJL2au4wFwBEjGk" target="_blank" class="prev-row">
+        <div class="prev-row-left">
+          <span class="prev-num">02</span>
+          <span class="prev-title">Bow</span>
+        </div>
+        <span class="prev-platform">Spotify ↗</span>
+      </a>
+      <a href="https://open.spotify.com/track/4qeK8ctfJkzY8bBe1jKmvJ" target="_blank" class="prev-row">
+        <div class="prev-row-left">
+          <span class="prev-num">03</span>
+          <span class="prev-title">Substance</span>
+        </div>
+        <span class="prev-platform">Spotify ↗</span>
+      </a>
+    </div>
+
+    <!-- PLAYLIST -->
+    <p class="section-label">Playlist</p>
+    <a href="#" target="_blank" class="playlist-block">
+      <div class="pl-info">
+        <div>
+          <div class="pl-eyebrow">// Spotify Playlist</div>
+          <div class="pl-name">DNB <em>Right Now</em></div>
+          <p class="pl-desc">The tracks defining drum &amp; bass right now — curated and updated regularly.</p>
+        </div>
+        <div class="pl-bottom">
+          <span class="pl-cta">Open on Spotify</span>
+          <span class="pl-arrow">↗</span>
+        </div>
+      </div>
+      <div class="pl-visual">
+        <div class="pl-rings">
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+        </div>
+      </div>
+    </a>
+
+    <!-- SOCIALS -->
+    <p class="section-label">Follow</p>
+    <div class="socials-grid">
+      <a href="#" target="_blank" class="social-card">
+        <span class="soc-label">Music</span>
+        <span class="soc-name">Spotify</span>
+        <span class="soc-arrow">↗</span>
+      </a>
+      <a href="#" target="_blank" class="social-card">
+        <span class="soc-label">Watch</span>
+        <span class="soc-name">TikTok</span>
+        <span class="soc-arrow">↗</span>
+      </a>
+      <a href="#" target="_blank" class="social-card">
+        <span class="soc-label">Follow</span>
+        <span class="soc-name">Instagram</span>
+        <span class="soc-arrow">↗</span>
+      </a>
+      <a href="#" target="_blank" class="social-card">
+        <span class="soc-label">Listen</span>
+        <span class="soc-name">SoundCloud</span>
+        <span class="soc-arrow">↗</span>
+      </a>
+    </div>
+
+    <!-- BOOKING -->
+    <p class="section-label">Bookings</p>
+    <div class="booking-block">
+      <p class="booking-eyebrow">// Bookings &amp; Demos</p>
+      <h2 class="booking-heading">Want me on<br />your <em>stage?</em></h2>
+      <p class="booking-sub">DJ bookings, festival slots, label demos. Promoters, curators, bookers — the inbox is open.</p>
+      <a href="mailto:booking@jonahboymusic.com" class="btn-primary">Get in Touch</a>
+      <span class="booking-email">booking@jonahboymusic.com</span>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Jonah <span>Boy</span></span>
+    <span class="footer-copy">© 2026 Jonah Boy Music</span>
+  </footer>
+
+  <script>
+    // Cursor
+    const cur = document.getElementById('cursor');
+    const rng = document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function tick(){
+      cur.style.left=mx+'px'; cur.style.top=my+'px';
+      rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+      rng.style.left=rx+'px'; rng.style.top=ry+'px';
+      requestAnimationFrame(tick);
+    })();
+  </script>
 </body>
 </html>
