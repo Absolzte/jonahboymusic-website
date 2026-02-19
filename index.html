@@ -468,16 +468,41 @@
 
     <!-- HERO -->
     <div class="hero-header">
-      <p class="hero-eyebrow">// Drum &amp; Bass — Producer &amp; DJ</p>
-      <h1 class="hero-name">Jonah <em>Boy</em></h1>
-      <p class="hero-sub">Jungle · Heavy Rollers · Liquid · Boomtown 2026</p>
+      <p class="hero-eyebrow">Drum &amp; Bass — Producer &amp; DJ</p>
+      <h1 class="hero-name">Jonah Boy</h1>
+      <p class="hero-sub">Jungle · Heavy Rollers · Liquid</p>
     </div>
+
+    <!-- PLAYLIST -->
+    <p class="section-label">Playlist</p>
+    <a href="#" target="_blank" class="playlist-block">
+      <div class="pl-info">
+        <div>
+          <div class="pl-eyebrow">Spotify Playlist</div>
+          <div class="pl-name">DNB RIGHT NOW</div>
+          <p class="pl-desc">The tracks defining drum &amp; bass right now — curated and updated regularly.</p>
+        </div>
+        <div class="pl-bottom">
+          <span class="pl-cta">Open on Spotify</span>
+          <span class="pl-arrow">↗</span>
+        </div>
+      </div>
+      <div class="pl-visual">
+        <div class="pl-rings">
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+        </div>
+      </div>
+    </a>
 
     <!-- LATEST RELEASE -->
     <p class="section-label">Latest Release</p>
     <div class="release-block">
       <div class="release-header">
-        <div class="release-track-name"><em>Listen</em></div>
+        <div class="release-track-name">Listen</div>
         <span class="release-badge-new">Out Now</span>
       </div>
       <div class="release-meta">Jonah Boy · Drum &amp; Bass · 2026</div>
@@ -517,31 +542,6 @@
       </a>
     </div>
 
-    <!-- PLAYLIST -->
-    <p class="section-label">Playlist</p>
-    <a href="#" target="_blank" class="playlist-block">
-      <div class="pl-info">
-        <div>
-          <div class="pl-eyebrow">// Spotify Playlist</div>
-          <div class="pl-name">DNB <em>Right Now</em></div>
-          <p class="pl-desc">The tracks defining drum &amp; bass right now — curated and updated regularly.</p>
-        </div>
-        <div class="pl-bottom">
-          <span class="pl-cta">Open on Spotify</span>
-          <span class="pl-arrow">↗</span>
-        </div>
-      </div>
-      <div class="pl-visual">
-        <div class="pl-rings">
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-        </div>
-      </div>
-    </a>
-
     <!-- SOCIALS -->
     <p class="section-label">Follow</p>
     <div class="socials-grid">
@@ -570,11 +570,11 @@
     <!-- BOOKING -->
     <p class="section-label">Bookings</p>
     <div class="booking-block">
-      <p class="booking-eyebrow">// Bookings &amp; Demos</p>
-      <h2 class="booking-heading">Want me on<br />your <em>stage?</em></h2>
-      <p class="booking-sub">DJ bookings, festival slots, label demos. Promoters, curators, bookers — the inbox is open.</p>
-      <a href="mailto:booking@jonahboymusic.com" class="btn-primary">Get in Touch</a>
-      <span class="booking-email">booking@jonahboymusic.com</span>
+      <p class="booking-eyebrow">Bookings &amp; Contact</p>
+      <h2 class="booking-heading">Get in touch</h2>
+      <p class="booking-sub">For bookings, demos and everything else.</p>
+      <a href="mailto:jonahboymusic@outlook.com" class="btn-primary">Get in Touch</a>
+      <span class="booking-email">jonahboymusic@outlook.com</span>
     </div>
 
   </div>
@@ -585,18 +585,9 @@
     <span class="footer-copy">© 2026 Jonah Boy Music</span>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Cursor
     const cur = document.getElementById('cursor');
     const rng = document.getElementById('cursorRing');
     let mx=0,my=0,rx=0,ry=0;
-    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-    (function tick(){
-      cur.style.left=mx+'px'; cur.style.top=my+'px';
-      rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-      rng.style.left=rx+'px'; rng.style.top=ry+'px';
-      requestAnimationFrame(tick);
-    })();
-  </script>
-</body>
-</html>
+    document.addEventListener('mous
