@@ -18,9 +18,9 @@
       --border-hover: rgba(255,255,255,0.14);
       --white: #f0ece4;
       --muted: rgba(240,236,228,0.42);
-      --accent: #c8ff46;
-      --accent-dim: rgba(200,255,70,0.1);
-      --accent-border: rgba(200,255,70,0.35);
+      --accent: #ff3028;
+      --accent-dim: rgba(255,48,40,0.1);
+      --accent-border: rgba(255,48,40,0.35);
     }
 
     html { scroll-behavior: smooth; }
@@ -48,7 +48,7 @@
     .glow {
       position: fixed;
       width: 600px; height: 600px;
-      background: radial-gradient(ellipse, rgba(200,255,70,0.035) 0%, transparent 68%);
+      background: radial-gradient(ellipse, rgba(255,48,40,0.035) 0%, transparent 68%);
       top: 20%; left: 50%;
       transform: translateX(-50%);
       pointer-events: none; z-index: 0;
@@ -305,17 +305,17 @@
     .pl-visual::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(200,255,70,0.07) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(255,48,40,0.07) 0%, transparent 70%);
     }
     .pl-rings { position: relative; width: 120px; height: 120px; }
     .pl-rings .ring {
       position: absolute; border-radius: 50%;
-      border: 1px solid rgba(200,255,70,0.14);
+      border: 1px solid rgba(255,48,40,0.14);
       top: 50%; left: 50%;
       transform: translate(-50%,-50%);
       animation: ringPulse 3s ease-in-out infinite;
     }
-    .pl-rings .ring:nth-child(1) { width: 28px; height: 28px; border-color: rgba(200,255,70,0.6); animation-delay: 0s; }
+    .pl-rings .ring:nth-child(1) { width: 28px; height: 28px; border-color: rgba(255,48,40,0.6); animation-delay: 0s; }
     .pl-rings .ring:nth-child(2) { width: 56px; height: 56px; animation-delay: 0.45s; }
     .pl-rings .ring:nth-child(3) { width: 84px; height: 84px; animation-delay: 0.9s; }
     .pl-rings .ring:nth-child(4) { width: 112px; height: 112px; animation-delay: 1.35s; }
