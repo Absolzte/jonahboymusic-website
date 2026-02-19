@@ -30,26 +30,11 @@
       color: var(--white);
       font-family: 'Syne', sans-serif;
       overflow-x: hidden;
-      cursor: none;
+
       min-height: 100vh;
     }
 
-    /* ── CURSOR ── */
-    .cursor {
-      position: fixed; width: 8px; height: 8px;
-      background: var(--accent); border-radius: 50%;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%,-50%);
-      mix-blend-mode: difference;
-      transition: width 0.15s, height 0.15s;
-    }
-    .cursor-ring {
-      position: fixed; width: 32px; height: 32px;
-      border: 1px solid rgba(200,255,70,0.4);
-      border-radius: 50%; pointer-events: none; z-index: 9998;
-      transform: translate(-50%,-50%);
-    }
-    a:hover .cursor { width: 16px; height: 16px; }
+
 
     /* ── GRAIN ── */
     body::before {
@@ -454,8 +439,6 @@
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
   <div class="glow"></div>
 
   <!-- NAV -->
@@ -573,8 +556,8 @@
       <p class="booking-eyebrow">Bookings &amp; Contact</p>
       <h2 class="booking-heading">Get in touch</h2>
       <p class="booking-sub">For bookings, demos and everything else.</p>
-      <a href="mailto:jonahboymusic@outlook.com" class="btn-primary">Get in Touch</a>
-      <span class="booking-email">jonahboymusic@outlook.com</span>
+      <a href="/cdn-cgi/l/email-protection#f993969798919b9680948c8a909ab9968c8d95969692d79a9694" class="btn-primary">Get in Touch</a>
+      <span class="booking-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="046e6b6a656c666b7d6971776d67446b7170686b6b6f2a676b69">[email&#160;protected]</a></span>
     </div>
 
   </div>
@@ -585,9 +568,4 @@
     <span class="footer-copy">© 2026 Jonah Boy Music</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Cursor
-    const cur = document.getElementById('cursor');
-    const rng = document.getElementById('cursorRing');
-    let mx=0,my=0,rx=0,ry=0;
-    document.addEventListener('mous
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfas
