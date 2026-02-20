@@ -30,11 +30,8 @@
       color: var(--white);
       font-family: 'Syne', sans-serif;
       overflow-x: hidden;
-
       min-height: 100vh;
     }
-
-
 
     /* ── GRAIN ── */
     body::before {
@@ -249,23 +246,31 @@
       transition: transform 0.2s, color 0.2s; flex-shrink: 0;
     }
 
+    /* ── PLAYLISTS GRID ── */
+    .playlists-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      animation: fadeUp 0.9s ease 0.75s both;
+    }
+
     /* ── PLAYLIST BLOCK ── */
     .playlist-block {
-      border: 1px solid var(--border);
+      border: none;
       display: flex; align-items: stretch;
       text-decoration: none; color: var(--white);
       transition: border-color 0.3s;
       overflow: hidden;
-      animation: fadeUp 0.9s ease 0.75s both;
+      background: var(--panel);
     }
-    .playlist-block:hover { border-color: var(--accent-border); }
+    .playlist-block:hover { background: var(--panel-hover); }
     .playlist-block:hover .pl-arrow { transform: translate(4px,-4px); color: var(--accent); }
     .playlist-block:hover .pl-rings .ring { animation-play-state: running; }
 
     .pl-info {
       flex: 1; padding: 2rem;
       display: flex; flex-direction: column; justify-content: space-between;
-      border-right: 1px solid var(--border);
     }
     .pl-eyebrow {
       font-family: 'IBM Plex Mono', monospace;
@@ -275,7 +280,7 @@
     }
     .pl-name {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
       line-height: 1; letter-spacing: -0.02em;
     }
     .pl-name em { font-style: italic; color: var(--accent); }
@@ -295,34 +300,6 @@
     .pl-arrow {
       font-size: 1.1rem; color: var(--muted);
       transition: transform 0.2s, color 0.2s;
-    }
-    .pl-visual {
-      width: 160px; flex-shrink: 0;
-      background: var(--off-black);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .pl-visual::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(255,48,40,0.07) 0%, transparent 70%);
-    }
-    .pl-rings { position: relative; width: 120px; height: 120px; }
-    .pl-rings .ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(255,48,40,0.14);
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      animation: ringPulse 3s ease-in-out infinite;
-    }
-    .pl-rings .ring:nth-child(1) { width: 28px; height: 28px; border-color: rgba(255,48,40,0.6); animation-delay: 0s; }
-    .pl-rings .ring:nth-child(2) { width: 56px; height: 56px; animation-delay: 0.45s; }
-    .pl-rings .ring:nth-child(3) { width: 84px; height: 84px; animation-delay: 0.9s; }
-    .pl-rings .ring:nth-child(4) { width: 112px; height: 112px; animation-delay: 1.35s; }
-    .pl-rings .ring:nth-child(5) { width: 140px; height: 140px; animation-delay: 1.8s; }
-    @keyframes ringPulse {
-      0%,100% { opacity: 0.2; transform: translate(-50%,-50%) scale(1); }
-      50%      { opacity: 0.7; transform: translate(-50%,-50%) scale(1.04); }
     }
 
     /* ── SOCIALS ── */
@@ -431,8 +408,7 @@
       .release-actions { grid-template-columns: 1fr; }
       .release-btn:first-child { border-right: none; border-bottom: 1px solid var(--border); }
       .socials-grid { grid-template-columns: repeat(2,1fr); }
-      .pl-visual { display: none; }
-      .pl-info { border-right: none; }
+      .playlists-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; }
     }
   </style>
@@ -456,30 +432,39 @@
       <p class="hero-sub">Jungle · Heavy Rollers · Liquid</p>
     </div>
 
-    <!-- PLAYLIST -->
-    <p class="section-label">Playlist</p>
-    <a href="https://open.spotify.com/playlist/242E8jakM8civYW4IWHrVv" target="_blank" class="playlist-block">
-      <div class="pl-info">
-        <div>
-          <div class="pl-eyebrow">Spotify Playlist</div>
-          <div class="pl-name">DNB RIGHT NOW</div>
-          <p class="pl-desc">3 tracks picked out from each week of DNB releases.</p>
+    <!-- PLAYLISTS -->
+    <p class="section-label">Playlists</p>
+    <div class="playlists-grid">
+
+      <a href="https://open.spotify.com/playlist/242E8jakM8civYW4IWHrVv" target="_blank" class="playlist-block">
+        <div class="pl-info">
+          <div>
+            <div class="pl-eyebrow">Spotify Playlist</div>
+            <div class="pl-name">DNB RIGHT NOW</div>
+            <p class="pl-desc">3 tracks picked out from each week of DNB releases.</p>
+          </div>
+          <div class="pl-bottom">
+            <span class="pl-cta">Open on Spotify</span>
+            <span class="pl-arrow">↗</span>
+          </div>
         </div>
-        <div class="pl-bottom">
-          <span class="pl-cta">Open on Spotify</span>
-          <span class="pl-arrow">↗</span>
+      </a>
+
+      <a href="https://open.spotify.com/playlist/1CMoteGJ9Ffh5mx4UsJpeT" target="_blank" class="playlist-block">
+        <div class="pl-info">
+          <div>
+            <div class="pl-eyebrow">Spotify Playlist</div>
+            <div class="pl-name">DNB DRIVING</div>
+            <p class="pl-desc">The perfect drum &amp; bass soundtrack for the road.</p>
+          </div>
+          <div class="pl-bottom">
+            <span class="pl-cta">Open on Spotify</span>
+            <span class="pl-arrow">↗</span>
+          </div>
         </div>
-      </div>
-      <div class="pl-visual">
-        <div class="pl-rings">
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-          <div class="ring"></div>
-        </div>
-      </div>
-    </a>
+      </a>
+
+    </div>
 
     <!-- LATEST RELEASE -->
     <p class="section-label">Latest Release</p>
@@ -528,22 +513,22 @@
     <!-- SOCIALS -->
     <p class="section-label">Follow</p>
     <div class="socials-grid">
-      <a href="#" target="_blank" class="social-card">
+      <a href="https://open.spotify.com/artist/3fsE2p4n18ChinOx3Pah1A" target="_blank" class="social-card">
         <span class="soc-label">Music</span>
         <span class="soc-name">Spotify</span>
         <span class="soc-arrow">↗</span>
       </a>
-      <a href="#" target="_blank" class="social-card">
+      <a href="https://www.tiktok.com/@jonah.boy_" target="_blank" class="social-card">
         <span class="soc-label">Watch</span>
         <span class="soc-name">TikTok</span>
         <span class="soc-arrow">↗</span>
       </a>
-      <a href="#" target="_blank" class="social-card">
+      <a href="https://www.instagram.com/jonahboymusic" target="_blank" class="social-card">
         <span class="soc-label">Follow</span>
         <span class="soc-name">Instagram</span>
         <span class="soc-arrow">↗</span>
       </a>
-      <a href="#" target="_blank" class="social-card">
+      <a href="https://soundcloud.com/jonah_boy" target="_blank" class="social-card">
         <span class="soc-label">Listen</span>
         <span class="soc-name">SoundCloud</span>
         <span class="soc-arrow">↗</span>
@@ -568,4 +553,5 @@
     <span class="footer-copy">© 2026 Jonah Boy Music</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfas
+</body>
+</html>
