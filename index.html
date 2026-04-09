@@ -137,7 +137,103 @@
       padding: 1.6rem 0 1.2rem;
     }
 
-    /* ── RELEASE BLOCK ── */
+    /* ── NEW RELEASE HERO ── */
+    .new-release-hero {
+      border: 1px solid var(--border);
+      overflow: hidden;
+      animation: fadeUp 0.9s ease 0.45s both;
+    }
+
+    .new-release-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+      filter: brightness(0.75);
+    }
+
+    .new-release-body {
+      padding: 2rem 2rem 0;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .new-release-title-block { flex: 1; }
+
+    .new-release-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.56rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .new-release-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      line-height: 1; letter-spacing: -0.02em;
+    }
+
+    .new-release-title em { font-style: italic; color: var(--accent); }
+
+    .new-release-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 0.6rem 2rem 0;
+    }
+
+    .new-release-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      background: var(--accent-dim); color: var(--accent);
+      border: 1px solid var(--accent-border);
+      white-space: nowrap;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+
+    .new-release-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+      margin-top: 1.8rem;
+    }
+
+    .new-release-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 2rem;
+      text-decoration: none; color: var(--white);
+      background: var(--panel);
+      transition: background 0.25s;
+      gap: 1rem;
+    }
+    .new-release-btn:first-child {
+      border-right: 1px solid var(--border);
+    }
+    .new-release-btn:hover { background: var(--panel-hover); }
+    .new-release-btn:hover .btn-arrow { transform: translate(3px,-3px); color: var(--accent); }
+    .new-release-btn.soundcloud-btn:hover { background: #1a1208; }
+
+    .btn-left { display: flex; flex-direction: column; gap: 0.3rem; }
+    .btn-platform {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .btn-action {
+      font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+    .btn-action-free { color: #ff8c00; }
+    .btn-arrow {
+      font-size: 1.1rem; color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    /* ── RELEASE BLOCK (old, kept for potential reuse) ── */
     .release-block {
       border: 1px solid var(--border);
       overflow: hidden;
@@ -169,8 +265,6 @@
       text-transform: uppercase; color: var(--muted);
       padding: 0.6rem 2rem 1.8rem;
     }
-
-    /* Two CTA buttons */
     .release-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -184,28 +278,11 @@
       transition: background 0.25s;
       gap: 1rem;
     }
-    .release-btn:first-child {
-      border-right: 1px solid var(--border);
-    }
+    .release-btn:first-child { border-right: 1px solid var(--border); }
     .release-btn:hover { background: var(--panel-hover); }
     .release-btn:hover .btn-arrow { transform: translate(3px,-3px); color: var(--accent); }
     .release-btn:first-child:hover { background: #1a1f0f; }
-    .btn-left { display: flex; flex-direction: column; gap: 0.3rem; }
-    .btn-platform {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.58rem; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .btn-action {
-      font-weight: 700; font-size: 0.9rem;
-      letter-spacing: 0.02em;
-    }
     .btn-action-stream { color: var(--accent); }
-    .btn-arrow {
-      font-size: 1.1rem; color: var(--muted);
-      transition: transform 0.2s, color 0.2s;
-      flex-shrink: 0;
-    }
 
     /* ── PREVIOUS RELEASES ── */
     .prev-releases {
@@ -266,7 +343,6 @@
     }
     .playlist-block:hover { background: var(--panel-hover); }
     .playlist-block:hover .pl-arrow { transform: translate(4px,-4px); color: var(--accent); }
-    .playlist-block:hover .pl-rings .ring { animation-play-state: running; }
 
     .pl-info {
       flex: 1; padding: 2rem;
@@ -405,6 +481,8 @@
     @media (max-width: 600px) {
       nav { padding: 1.1rem 1.4rem; }
       .page { padding: 7.5rem 1.2rem 4rem; }
+      .new-release-actions { grid-template-columns: 1fr; }
+      .new-release-btn:first-child { border-right: none; border-bottom: 1px solid var(--border); }
       .release-actions { grid-template-columns: 1fr; }
       .release-btn:first-child { border-right: none; border-bottom: 1px solid var(--border); }
       .socials-grid { grid-template-columns: repeat(2,1fr); }
@@ -420,7 +498,7 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">Jonah <span>Boy</span></a>
-    <a href="https://open.spotify.com/track/0VQh7Q2BRb6Nvfy2IR5b4v" target="_blank" class="nav-pill">New Track — Listen ↗</a>
+    <a href="https://soundcloud.com/jonah_boy/lp-rhythm-versatile-jonah-boy" target="_blank" class="nav-pill">Free Download ↗</a>
   </nav>
 
   <div class="page">
@@ -429,7 +507,28 @@
     <div class="hero-header">
       <p class="hero-eyebrow">Drum &amp; Bass — Producer &amp; DJ</p>
       <h1 class="hero-name">Jonah Boy</h1>
-      <p class="hero-sub">Jungle · Heavy Rollers · Liquid</p>
+    </div>
+
+    <!-- NEW RELEASE HERO -->
+    <p class="section-label">New Release</p>
+    <div class="new-release-hero">
+      <div class="new-release-body">
+        <div class="new-release-title-block">
+          <div class="new-release-label">LP Rhythm</div>
+          <div class="new-release-title"><em>Versatile Bootleg</em></div>
+        </div>
+        <span class="new-release-badge">Free Download</span>
+      </div>
+      <div class="new-release-meta">Jonah Boy · Drum &amp; Bass · 2026</div>
+      <div class="new-release-actions" style="grid-template-columns: 1fr;">
+        <a href="https://soundcloud.com/jonah_boy/lp-rhythm-versatile-jonah-boy" target="_blank" class="new-release-btn soundcloud-btn">
+          <div class="btn-left">
+            <span class="btn-platform">SoundCloud</span>
+            <span class="btn-action btn-action-free">Free Download</span>
+          </div>
+          <span class="btn-arrow">↗</span>
+        </a>
+      </div>
     </div>
 
     <!-- PLAYLISTS -->
@@ -466,34 +565,16 @@
 
     </div>
 
-    <!-- LATEST RELEASE -->
-    <p class="section-label">Latest Release</p>
-    <div class="release-block">
-      <div class="release-header">
-        <div class="release-track-name">Listen</div>
-        <span class="release-badge-new">Out Now</span>
-      </div>
-      <div class="release-meta">Jonah Boy · Drum &amp; Bass · 2026</div>
-      <div class="release-actions">
-        <a href="https://open.spotify.com/track/0VQh7Q2BRb6Nvfy2IR5b4v" target="_blank" class="release-btn">
-          <div class="btn-left">
-            <span class="btn-platform">Spotify</span>
-            <span class="btn-action btn-action-stream">Stream Free</span>
-          </div>
-          <span class="btn-arrow">↗</span>
-        </a>
-        <a href="https://www.beatport.com/release/listen/5889649" target="_blank" class="release-btn">
-          <div class="btn-left">
-            <span class="btn-platform">Beatport</span>
-            <span class="btn-action">Buy / Download</span>
-          </div>
-          <span class="btn-arrow">↗</span>
-        </a>
-      </div>
-    </div>
-
     <!-- PREVIOUS RELEASES -->
-    <div class="prev-releases">
+    <p class="section-label">Previous Releases</p>
+    <div class="prev-releases" style="border-top: 1px solid var(--border);">
+      <a href="https://open.spotify.com/track/0VQh7Q2BRb6Nvfy2IR5b4v" target="_blank" class="prev-row">
+        <div class="prev-row-left">
+          <span class="prev-num">01</span>
+          <span class="prev-title">Listen</span>
+        </div>
+        <span class="prev-platform">Spotify ↗</span>
+      </a>
       <a href="https://open.spotify.com/track/3XLGat8nJL2au4wFwBEjGk" target="_blank" class="prev-row">
         <div class="prev-row-left">
           <span class="prev-num">02</span>
@@ -541,17 +622,10 @@
       <p class="booking-eyebrow">Bookings &amp; Contact</p>
       <h2 class="booking-heading">Get in touch</h2>
       <p class="booking-sub">For bookings, demos and everything else.</p>
-      <a href="mailto:jonahboymusic@outlook.com" class="btn-primary">Get in Touch</a>
-      <span class="booking-email">jonahboymusic@outlook.com</span>
+      <a href="/cdn-cgi/l/email-protection#e18b8e8f8089838e988c94928882a18e94958d8e8e8acf828e8c" class="btn-primary">Get in Touch</a>
+      <span class="booking-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc7c2c3ccc5cfc2d4c0d8dec4ceedc2d8d9c1c2c2c683cec2c0">[email&#160;protected]</a></span>
     </div>
 
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">Jonah <span>Boy</span></span>
-    <span class="footer-copy">© 2026 Jonah Boy Music</span>
-  </footer>
-
-</body>
-</html>
+  <
