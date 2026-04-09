@@ -227,6 +227,22 @@
       letter-spacing: 0.02em;
     }
     .btn-action-free { color: #ff8c00; }
+
+    /* ── SECOND FREE DOWNLOAD CTA ── */
+    .second-cta {
+      display: block;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ff8c00;
+      text-decoration: none;
+      padding: 1rem 0;
+      border: 1px solid var(--border);
+      border-top: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .second-cta:hover { background: var(--panel); color: var(--white); }
     .btn-arrow {
       font-size: 1.1rem; color: var(--muted);
       transition: transform 0.2s, color 0.2s;
@@ -480,7 +496,9 @@
     /* ── MOBILE ── */
     @media (max-width: 600px) {
       nav { padding: 1.1rem 1.4rem; }
-      .page { padding: 7.5rem 1.2rem 4rem; }
+      .page { padding: 6.5rem 1.2rem 4rem; }
+      .hero-header { padding-bottom: 1.8rem; }
+      .section-label { padding: 1rem 0 0.8rem; }
       .new-release-actions { grid-template-columns: 1fr; }
       .new-release-btn:first-child { border-right: none; border-bottom: 1px solid var(--border); }
       .release-actions { grid-template-columns: 1fr; }
@@ -511,13 +529,13 @@
 
     <!-- NEW RELEASE HERO -->
     <p class="section-label">New Release</p>
-    <div class="new-release-hero">
+    <div class="new-release-hero" id="new-release">
       <div class="new-release-body">
         <div class="new-release-title-block">
           <div class="new-release-label">LP Rhythm</div>
           <div class="new-release-title"><em>Versatile Bootleg</em></div>
         </div>
-        <span class="new-release-badge">Free Download</span>
+        <span class="new-release-badge">Free on SoundCloud</span>
       </div>
       <div class="new-release-meta">Jonah Boy · Drum &amp; Bass · 2026</div>
       <div class="new-release-actions" style="grid-template-columns: 1fr;">
@@ -530,6 +548,7 @@
         </a>
       </div>
     </div>
+
 
     <!-- PLAYLISTS -->
     <p class="section-label">Playlists</p>
@@ -594,11 +613,6 @@
     <!-- SOCIALS -->
     <p class="section-label">Follow</p>
     <div class="socials-grid">
-      <a href="https://open.spotify.com/artist/3fsE2p4n18ChinOx3Pah1A" target="_blank" class="social-card">
-        <span class="soc-label">Music</span>
-        <span class="soc-name">Spotify</span>
-        <span class="soc-arrow">↗</span>
-      </a>
       <a href="https://www.tiktok.com/@jonah.boy_" target="_blank" class="social-card">
         <span class="soc-label">Watch</span>
         <span class="soc-name">TikTok</span>
@@ -607,6 +621,11 @@
       <a href="https://www.instagram.com/jonahboymusic" target="_blank" class="social-card">
         <span class="soc-label">Follow</span>
         <span class="soc-name">Instagram</span>
+        <span class="soc-arrow">↗</span>
+      </a>
+      <a href="https://open.spotify.com/artist/3fsE2p4n18ChinOx3Pah1A" target="_blank" class="social-card">
+        <span class="soc-label">Music</span>
+        <span class="soc-name">Spotify</span>
         <span class="soc-arrow">↗</span>
       </a>
       <a href="https://soundcloud.com/jonah_boy" target="_blank" class="social-card">
